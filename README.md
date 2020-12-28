@@ -1,26 +1,31 @@
 # Spring Boot Upload/Download CSV Files with MySQL database example
 
-this is a small spring boot app to demo CSV file upload and persist data to mySQL database 
+this is a spring boot app to demo CSV file upload and persist data to mySQL database 
 
-we will also be able to update attributes in the CSV record using HTTP PATCH or PUT operation.
+this app can also update attributes in the CSV record using HTTP PATCH or PUT operation.
 
-user will be able to access and retrieve the uploaded file data from mySQL DB using HTTP GET operation.
+users will be able to access and retrieve the uploaded file data from mySQL DB using HTTP GET operation.
 
 HTTP GET will have a find all and find by ID operation. 
 
-and we also expose a HTTP DELETE by ID operation for reconciliation purpose. 
+and we also expose a HTTP DELETE by ID operation to remove records for reconciliation purpose. 
 
-a CSV helper utility is used from apache commons library to parse CSV file to get the CSV records and 
+a CSV parser utility is used from apache commons library to parse CSV file to get the CSV records and 
 
-populate into a domain model object, and also to write model records to a byte array output stream and 
+populate into a domain model object, and also a CSV printer utility is used to write model records to 
 
-to get the input stream to read this file. 
+a byte array output stream and get the input stream to read this file. 
 
 basic validation in the form of @NotNull and @NotEmpty annotation the the domain model entity are added
 
-along with @Valid annotation before the @RequestBody can help to validate the input.
+along with @Valid annotation before the @RequestBody which can help to validate the input.
 
-basic exception handling support is added for get query for invalid ID.
+basic exception handling support with @ControllerAdvice and @ExceptionHandler is added for for exceptions like 
+invalid ID in the GET request URL or trying to upload a file greater than max configured file size (2 MB).
+
+if you prefer to POST a JSON payload to create a new record in DB, then enable the @GeneratedValue annotation
+in the domain model id attribute to auto-generate the ID value, but if you prefer to specify the ID in the CSV 
+file to be uploaded then comment this @GeneratedValue annotation to manually specify the ID in the CSV file.
 
 TODO : validate the file upload to avoid corrupted record or invalid format in the client file. 
 
@@ -43,6 +48,38 @@ REST API endpoints to review and test
 7) DEL /api/csv/modeldata/{id} : to delete a record by id 
 
 ## Run Spring Boot application
+
+start the mysql DB either as a docker container or from windows mysql app 
+configure the mysql datasource connection properties in application.properties 
+
 ```
+build the JAR file using mvn clean package -DskipTests=true and then run below 
+
+docker-compose -f docker-compose-mysql.yml up 
+
+java -jar target/spring-boot-upload-csv-files-0.0.1-SNAPSHOT.jar
+
+or
+
 mvn spring-boot:run
+
+
+```
+use POSTMAN REST API client to test the REST API endpoints mentioned above. 
+
+default server port is 8080 for tomcat web server.
+
+also refer below the configured application.properties below 
+
+```
+spring.datasource.url= jdbc:mysql://localhost:3306/testdb?useSSL=false
+spring.datasource.username= root
+spring.datasource.password= mysql
+
+spring.jpa.properties.hibernate.dialect= org.hibernate.dialect.MySQL5InnoDBDialect
+spring.jpa.hibernate.ddl-auto= update
+
+spring.servlet.multipart.max-file-size=2MB
+spring.servlet.multipart.max-request-size=2MB
+
 ```
