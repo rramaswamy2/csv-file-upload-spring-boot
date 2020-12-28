@@ -6,7 +6,7 @@ users will be able to access and retrieve the uploaded file data from mySQL DB u
 
 we also expose a HTTP DELETE by ID operation to remove old, outdated, obsolete, erroneous or invalid records for reconciliation purpose. 
 
-a CSV parser utility is used from apache commons library to parse CSV file to get the CSV records and populate into a domain model object, and also a CSV printer utility is used to write model records to a byte array output stream and get the input stream to read this file. 
+a CSV parser utility is used from apache commons library to parse CSV file to get the CSV records and populate into a domain model object, and also a CSV printer utility is used to write model records to a byte array output stream and get the input stream to read this file. if there is any issue with parsing the CSV file or file type is not CSV, then an exception will be thrown 
 
 basic validation in the form of @NotNull and @NotEmpty annotation the the domain model entity are added along with @Valid annotation before the @RequestBody which can help to validate the input.
 
