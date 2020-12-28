@@ -10,7 +10,7 @@ a CSV parser utility is used from apache commons library to parse CSV file to ge
 
 if there is any issue with parsing the CSV file or file type is not CSV, then an error/exception message stating that the file type should be CSV will be displayed. also validation in the form of @NotNull and @NotEmpty annotation the the domain model entity are added along with @Valid annotation before the @RequestBody which can help to validate the input if we are posting a JSON input payload.
 
-basic exception handling support with @ControllerAdvice and @ExceptionHandler is added for for exceptions like invalid entity ID in the GET request URL or trying to upload a file greater than max configured file size (2 MB).
+basic exception handling support with @ControllerAdvice and @ExceptionHandler is added for exceptions like invalid entity ID in the GET request URL (ModelDataNotFoundException) or trying to upload a file greater than max configured file size (MaxUploadSizeExceededException , currently configured for 2 MB).
 
 if you prefer to POST a JSON payload to create a new record in DB, then enable the @GeneratedValue annotation in the domain model id attribute to auto-generate the ID value, but if you prefer to specify the ID in the CSV file to be uploaded then comment this @GeneratedValue annotation to manually specify the ID in the CSV file.
 
@@ -31,6 +31,8 @@ REST API endpoints to review and test
 6) PATCH /api/csv/modeldata/{id} : to patch or update attributes in the model
 
 7) DEL /api/csv/modeldata/{id} : to delete a record by id 
+
+for local testing the HTTP prefix for above API endpoints should be http://localhost:8080
 
 ## Run Spring Boot application
 
@@ -56,9 +58,9 @@ default server port is 8080 for tomcat web server.
 also refer below the configured application.properties below 
 
 ```
-spring.datasource.url= jdbc:mysql://localhost:3306/testdb?useSSL=false
-spring.datasource.username= root
-spring.datasource.password= mysql
+spring.datasource.url= jdbc:mysql://localhost:3306/testdb?useSSL=false   #default DB = testdb
+spring.datasource.username= root  
+spring.datasource.password= mysql 
 
 spring.jpa.properties.hibernate.dialect= org.hibernate.dialect.MySQL5InnoDBDialect
 spring.jpa.hibernate.ddl-auto= update
