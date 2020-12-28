@@ -4,7 +4,7 @@ this is a spring boot app to demo CSV file upload and persist data to mySQL data
 
 users will be able to access and retrieve the uploaded file data from mySQL DB using HTTP GET operation. HTTP GET will have a find all and find by ID operation. 
 
-we also expose a HTTP DELETE by ID operation to remove erroneous or invalid records for reconciliation purpose. 
+we also expose a HTTP DELETE by ID operation to remove old, outdated, obsolete, erroneous or invalid records for reconciliation purpose. 
 
 a CSV parser utility is used from apache commons library to parse CSV file to get the CSV records and populate into a domain model object, and also a CSV printer utility is used to write model records to a byte array output stream and get the input stream to read this file. 
 
