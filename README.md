@@ -30,7 +30,7 @@ REST API endpoints to review and test
 
 5) GET /api/csv/download : to download the CSV file 
 
-6) PATCH /api/csv/modeldata : to patch or update attributes from the model
+6) PATCH /api/csv/modeldata/{id} : to patch or update attributes from the model
 
 7) DEL /api/csv/modeldata/{id} : to delete a record by id 
 
