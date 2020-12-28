@@ -6,15 +6,13 @@ users will be able to access and retrieve the uploaded file data from mySQL DB u
 
 we also expose a HTTP DELETE by ID operation to remove old, outdated, obsolete, erroneous or invalid records for reconciliation purpose. 
 
-a CSV parser utility is used from apache commons library to parse CSV file to get the CSV records and populate into a domain model object, and also a CSV printer utility is used to write model records to a byte array output stream and get the input stream to read this file. if there is any issue with parsing the CSV file or file type is not CSV, then an exception will be thrown 
+a CSV parser utility is used from apache commons library to parse CSV file to get the CSV records and populate into a domain model object, and also a CSV printer utility is used to write model records to a byte array output stream and get the input stream to read this file. 
 
-basic validation in the form of @NotNull and @NotEmpty annotation the the domain model entity are added along with @Valid annotation before the @RequestBody which can help to validate the input.
+if there is any issue with parsing the CSV file or file type is not CSV, then an error/exception message stating that the file type should be CSV will be displayed. also validation in the form of @NotNull and @NotEmpty annotation the the domain model entity are added along with @Valid annotation before the @RequestBody which can help to validate the input if we are posting a JSON input payload.
 
-basic exception handling support with @ControllerAdvice and @ExceptionHandler is added for for exceptions like invalid ID in the GET request URL or trying to upload a file greater than max configured file size (2 MB).
+basic exception handling support with @ControllerAdvice and @ExceptionHandler is added for for exceptions like invalid entity ID in the GET request URL or trying to upload a file greater than max configured file size (2 MB).
 
 if you prefer to POST a JSON payload to create a new record in DB, then enable the @GeneratedValue annotation in the domain model id attribute to auto-generate the ID value, but if you prefer to specify the ID in the CSV file to be uploaded then comment this @GeneratedValue annotation to manually specify the ID in the CSV file.
-
-TODO : validate the file upload to avoid corrupted record or invalid format in the client file. 
 
 Test the REST API endpoints using POSTMAN as the REST API client.
 
@@ -26,11 +24,11 @@ REST API endpoints to review and test
 
 3) GET /api/csv/modeldata : get all the persisted records from DB
 
-4) GET /api/csv/modeldata/{id} : get modeldata by id
+4) GET /api/csv/modeldata/{id} : get model data record by id
 
 5) GET /api/csv/download : to download the CSV file 
 
-6) PATCH /api/csv/modeldata/{id} : to patch or update attributes from the model
+6) PATCH /api/csv/modeldata/{id} : to patch or update attributes in the model
 
 7) DEL /api/csv/modeldata/{id} : to delete a record by id 
 
