@@ -40,15 +40,15 @@ start the mysql DB either as a docker container or from windows mysql app
 configure the mysql datasource connection properties in application.properties 
 
 ```
-build the JAR file using mvn clean package -DskipTests=true and then run below 
+ mvn clean package -DskipTests=true  #build the JAR file and skip unit tests
 
-docker-compose -f docker-compose-mysql.yml up 
+docker-compose -f docker-compose-mysql.yml up #start the mysql docker container using docker-compose
 
-java -jar target/spring-boot-upload-csv-files-0.0.1-SNAPSHOT.jar
+java -jar target/spring-boot-upload-csv-files-0.0.1-SNAPSHOT.jar # run the JAR file using java command
 
 or
 
-mvn spring-boot:run
+mvn spring-boot:run  # or use mvn spring-boot:run command to start the spring boot app
 
 ```
 use POSTMAN REST API client to test the REST API endpoints mentioned above. 
