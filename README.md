@@ -5,13 +5,14 @@ this is a spring boot app to demo CSV file upload and persist data to mySQL data
 users will be able to access and retrieve the uploaded file data from mySQL DB using HTTP GET operation. HTTP GET will have a find all and find by ID operation. 
 
 the CSV file header will have the below file format 
-header: PRIMARY_KEY,NAME,DESCRIPTION,UPDATED_TIMESTAMP , we will have a ID field as the PRIMARY_KEY which will be non-blank and unique to identify a record.
+header: PRIMARY_KEY,NAME,DESCRIPTION,UPDATED_TIMESTAMP
+we will have a ID field as the PRIMARY_KEY which will be non-blank and unique to identify a record.
 
 we also expose a HTTP DELETE by ID operation to remove old, outdated, stale, obsolete, erroneous or invalid records for reconciliation purpose. 
 
-a CSV parser utility is used from apache commons library to parse CSV file to get the CSV records and populate into a domain model object, and also a CSV printer utility is used to write model records to a byte array output stream and get the input stream to read/load and import this data to a CSV file. In the download HTTP GET API endpoint, set the request header "Content-disposition" : "attachment; filename=[yourFileName]" and "Content-Type" : "application/csv" to import/download the data in CSV file format.
+a CSV parser utility is used from apache commons library to parse CSV file to get the CSV records and populate into a domain model object, and also a CSV printer utility is used to write model records to a byte array output stream and get the input stream to read/load and import this data as a CSV file. In the download HTTP GET API endpoint, set the request header "Content-disposition" : "attachment; filename=[yourFileName]" and "Content-Type" : "application/csv" to import/download the data in CSV file format.
 
-if there is any issue with parsing the CSV file or file type is not CSV, then an error/exception message stating that the file type should be CSV will be displayed. also validation in the form of @NotNull and @NotEmpty annotation the the domain model entity are added along with @Valid annotation before the @RequestBody which can help to validate the input if we are posting a JSON input payload.
+if there is any issue with parsing the CSV file or file type is not CSV, then an error/exception message stating that the file type should be CSV will be displayed. also validation in the form of @NotNull and @NotEmpty annotation in the domain model entity is added along with @Valid annotation in the @RequestBody which can help to validate the input if we are posting a JSON input payload.
 
 for any interaction with mySQL DB we use a JPA repository which is a spring CRUD repository to do the CRUD operations on the data model entity using save, findAll, and findById methods
 
@@ -58,7 +59,7 @@ mvn spring-boot:run  # or use mvn spring-boot:run command to start the spring bo
 ```
 use POSTMAN REST API client to test the REST API endpoints mentioned above. 
 
-default server port is 8080 for tomcat web server.
+default server port is 8080 for tomcat web server embedded in the executable spring boot JAR.
 
 also refer below the configured application.properties below 
 
