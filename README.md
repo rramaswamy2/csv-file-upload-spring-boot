@@ -1,4 +1,4 @@
-# Spring Boot Upload/Download CSV Files with MySQL database example
+# Spring Boot Upload CSV Files and update and delete records with MySQL database example
 
 this is a spring boot app to demo CSV file upload and persist data to mySQL database. this app can also update attributes in the CSV record using HTTP PATCH or PUT operation.
 
