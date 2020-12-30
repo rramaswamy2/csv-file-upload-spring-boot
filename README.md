@@ -42,7 +42,8 @@ for local testing the HTTP prefix for above API endpoints should be http://local
 
 ## Run Spring Boot application
 
-start the mysql DB either as a docker container or from windows mysql client app 
+start the mysql DB either as a docker container or from windows mysql client app.
+if you prefer to run the dockerized mysql, then ensure you have docker desktop installed for tools like docker compose and required docker commands
 configure the mysql datasource connection properties in application.properties 
 
 ```
