@@ -9,7 +9,7 @@ header: PRIMARY_KEY,NAME,DESCRIPTION,UPDATED_TIMESTAMP , we will have a ID field
 
 we also expose a HTTP DELETE by ID operation to remove old, outdated, obsolete, erroneous or invalid records for reconciliation purpose. 
 
-a CSV parser utility is used from apache commons library to parse CSV file to get the CSV records and populate into a domain model object, and also a CSV printer utility is used to write model records to a byte array output stream and get the input stream to import this data to a CSV file. 
+a CSV parser utility is used from apache commons library to parse CSV file to get the CSV records and populate into a domain model object, and also a CSV printer utility is used to write model records to a byte array output stream and get the input stream to import this data to a CSV file. In the download HTTP GET API endpoint, set the request header "Content-disposition" : "attachment; filename=[yourFileName]" and "Content-Type" : "application/csv" to import/download the data in CSV file format.
 
 if there is any issue with parsing the CSV file or file type is not CSV, then an error/exception message stating that the file type should be CSV will be displayed. also validation in the form of @NotNull and @NotEmpty annotation the the domain model entity are added along with @Valid annotation before the @RequestBody which can help to validate the input if we are posting a JSON input payload.
 
