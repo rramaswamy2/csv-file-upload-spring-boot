@@ -13,6 +13,8 @@ a CSV parser utility is used from apache commons library to parse CSV file to ge
 
 if there is any issue with parsing the CSV file or file type is not CSV, then an error/exception message stating that the file type should be CSV will be displayed. also validation in the form of @NotNull and @NotEmpty annotation the the domain model entity are added along with @Valid annotation before the @RequestBody which can help to validate the input if we are posting a JSON input payload.
 
+for any interaction with mySQL DB we use a JPA repository to do the CRUD operations on the data model entity using save, findAll, and findById methods
+
 basic exception handling support with @ControllerAdvice and @ExceptionHandler is added for exceptions like invalid entity ID in the GET request URL (ModelDataNotFoundException) or trying to upload a file greater than max configured file size (MaxUploadSizeExceededException , currently configured for 2 MB).
 
 if you prefer to POST a JSON payload to create a new record in DB, then enable the @GeneratedValue annotation in the domain model id attribute to auto-generate the ID value, but if you prefer to specify the ID in the CSV file to be uploaded then comment this @GeneratedValue annotation to manually specify the ID in the CSV file.
