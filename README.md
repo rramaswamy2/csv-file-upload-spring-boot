@@ -4,11 +4,11 @@ this is a spring boot app to demo CSV file upload and persist data to mySQL data
 
 users will be able to access and retrieve the uploaded file data from mySQL DB using HTTP GET operation. HTTP GET will have a find all and find by ID operation. 
 
+we also expose a HTTP DELETE by ID operation to remove old, outdated, stale, obsolete, erroneous or invalid records for reconciliation purpose. 
+
 the CSV file header will have the below file format 
 header: PRIMARY_KEY,NAME,DESCRIPTION,UPDATED_TIMESTAMP
 we will have a ID field as the PRIMARY_KEY which will be non-blank and unique to identify a record.
-
-we also expose a HTTP DELETE by ID operation to remove old, outdated, stale, obsolete, erroneous or invalid records for reconciliation purpose. 
 
 a CSV parser utility is used from apache commons library to parse CSV file to get the CSV records and populate into a domain model object, and also a CSV printer utility is used to write model records to a byte array output stream and get the input stream to read/load and import this data as a CSV file. In the download HTTP GET API endpoint, set the request header "Content-disposition" : "attachment; filename=[yourFileName]" and "Content-Type" : "application/csv" to import/download the data in CSV file format.
 
@@ -38,7 +38,7 @@ REST API endpoints to review and test
 
 7) DEL /api/csv/modeldata/{id} : to delete a record by id 
 
-for local testing the HTTP prefix for above API endpoints should be http://localhost:8080
+for local testing the HTTP prefix for above API endpoints can be http://localhost:8080 (default server.port = 8080)
 
 ## Run Spring Boot application
 
