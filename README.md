@@ -1,6 +1,6 @@
 # Spring Boot Upload CSV Files and update and delete records with MySQL database example
 
-this is a spring boot app to demo CSV file upload and persist data to mySQL database. this app can also update attributes in the CSV record persisted to mySQL DB table using HTTP PATCH or PUT operation.
+this is a spring boot app to demo CSV file upload and persist data to mySQL database table. this app can also update attributes in the CSV record persisted to mySQL DB table using HTTP PATCH or PUT operation.
 
 users will be able to access and retrieve the uploaded file data from mySQL DB using HTTP GET operation. HTTP GET will have a find all and find by ID operation. 
 
@@ -32,7 +32,7 @@ REST API endpoints to review and test
 
 4) GET /api/csv/modeldata/{id} : get model data record by id
 
-5) GET /api/csv/download : to download the CSV file 
+5) GET /api/csv/download : to download the data in CSV file format 
 
 6) PATCH /api/csv/modeldata/{id} : to patch or update attributes in the model
 
@@ -43,7 +43,7 @@ for local testing the HTTP prefix for above API endpoints should be http://local
 ## Run Spring Boot application
 
 start the mysql DB either as a docker container or from windows mysql client app.
-if you prefer to run the dockerized mysql, then ensure you have docker desktop installed for tools like docker compose and required docker commands
+if you prefer to run the dockerized mysql, then ensure you have docker desktop installed for tools like docker compose and required docker commands to work.
 configure the mysql datasource connection properties in application.properties 
 
 ```
