@@ -7,15 +7,15 @@ users will be able to access and retrieve the uploaded file data from mySQL DB u
 the CSV file header will have the below file format 
 header: PRIMARY_KEY,NAME,DESCRIPTION,UPDATED_TIMESTAMP , we will have a ID field as the PRIMARY_KEY which will be non-blank and unique to identify a record.
 
-we also expose a HTTP DELETE by ID operation to remove old, outdated, obsolete, erroneous or invalid records for reconciliation purpose. 
+we also expose a HTTP DELETE by ID operation to remove old, outdated, stale, obsolete, erroneous or invalid records for reconciliation purpose. 
 
-a CSV parser utility is used from apache commons library to parse CSV file to get the CSV records and populate into a domain model object, and also a CSV printer utility is used to write model records to a byte array output stream and get the input stream to read and import this data to a CSV file. In the download HTTP GET API endpoint, set the request header "Content-disposition" : "attachment; filename=[yourFileName]" and "Content-Type" : "application/csv" to import/download the data in CSV file format.
+a CSV parser utility is used from apache commons library to parse CSV file to get the CSV records and populate into a domain model object, and also a CSV printer utility is used to write model records to a byte array output stream and get the input stream to read/load and import this data to a CSV file. In the download HTTP GET API endpoint, set the request header "Content-disposition" : "attachment; filename=[yourFileName]" and "Content-Type" : "application/csv" to import/download the data in CSV file format.
 
 if there is any issue with parsing the CSV file or file type is not CSV, then an error/exception message stating that the file type should be CSV will be displayed. also validation in the form of @NotNull and @NotEmpty annotation the the domain model entity are added along with @Valid annotation before the @RequestBody which can help to validate the input if we are posting a JSON input payload.
 
-for any interaction with mySQL DB we use a JPA repository to do the CRUD operations on the data model entity using save, findAll, and findById methods
+for any interaction with mySQL DB we use a JPA repository which is a spring CRUD repository to do the CRUD operations on the data model entity using save, findAll, and findById methods
 
-basic exception handling support with @ControllerAdvice and @ExceptionHandler is added for exceptions like invalid entity ID in the GET request URL (ModelDataNotFoundException) or trying to upload a file greater than max configured file size (MaxUploadSizeExceededException , currently configured for 2 MB).
+basic exception handling support with @ControllerAdvice and @ExceptionHandler is added for exceptions like invalid entity ID in the GET request URL (ModelDataNotFoundException) or trying to upload a file greater than max configured file size (MaxUploadSizeExceededException which is currently configured for 2 MB).
 
 if you prefer to POST a JSON payload to create a new record in DB, then enable the @GeneratedValue annotation in the domain model id attribute to auto-generate the ID value, but if you prefer to specify the ID in the CSV file to be uploaded then comment this @GeneratedValue annotation to manually specify the ID in the CSV file.
 
@@ -41,7 +41,7 @@ for local testing the HTTP prefix for above API endpoints should be http://local
 
 ## Run Spring Boot application
 
-start the mysql DB either as a docker container or from windows mysql app 
+start the mysql DB either as a docker container or from windows mysql client app 
 configure the mysql datasource connection properties in application.properties 
 
 ```
